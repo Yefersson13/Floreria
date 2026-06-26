@@ -1,0 +1,256 @@
+/**
+ * @file product-card.css
+ * @description Estilos para la tarjeta de producto e-commerce de la floristería.
+ * Implementa diseño premium con variables CSS, transiciones de hover y animaciones de favorito.
+ */
+
+/* Importación de tipografía elegante para floristería */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Paleta de Colores Florales */
+    --color-primary: #be185d;        /* Rosa intenso / Magenta elegante */
+    --color-primary-hover: #9d174d;  /* Rosa oscuro al hacer hover */
+    --color-secondary: #d97706;      /* Oro cálido para acentos/precios */
+    --color-text-dark: #1e293b;      /* Slate 800 para legibilidad alta */
+    --color-text-muted: #64748b;     /* Slate 500 para descripción */
+    --color-bg-card: #ffffff;        /* Fondo de la tarjeta */
+    --color-bg-overlay: rgba(15, 23, 42, 0.6); /* Overlay oscuro semitransparente */
+    --color-favorite-active: #ec4899; /* Rosa vibrante para favorito */
+    --color-border: #f1f5f9;         /* Borde sutil de la card */
+    
+    /* Configuración de Tarjeta */
+    --border-radius-card: 16px;
+    --border-radius-btn: 50px;
+    --shadow-card-normal: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    --shadow-card-hover: 0 20px 25px -5px rgba(190, 24, 93, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    
+    /* Transiciones */
+    --transition-speed: 0.3s;
+    --transition-curve: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tarjeta Principal */
+.product-card {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--color-bg-card);
+    border-radius: var(--border-radius-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card-normal);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    transition: transform var(--transition-speed) var(--transition-curve), 
+                box-shadow var(--transition-speed) var(--transition-curve);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+/* Contenedor de Imagen y Overlay */
+.product-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* Relación de aspecto 1:1 */
+    overflow: hidden;
+    background-color: #f8fafc;
+}
+
+.product-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--transition-curve);
+}
+
+.product-card:hover .product-card__image {
+    transform: scale(1.1);
+}
+
+/* Overlay en Hover */
+.product-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-overlay);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity var(--transition-speed) var(--transition-curve);
+    z-index: 10;
+}
+
+.product-card:hover .product-card__overlay {
+    opacity: 1;
+}
+
+/* Botón "Ver Detalles" centrado */
+.product-card__btn-details {
+    background-color: #ffffff;
+    color: var(--color-text-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform var(--transition-speed) var(--transition-curve), 
+                opacity var(--transition-speed) var(--transition-curve),
+                background-color 0.2s ease,
+                color 0.2s ease;
+    z-index: 11;
+}
+
+.product-card:hover .product-card__btn-details {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.product-card__btn-details:hover {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
+
+/* Corazón de Favorito en esquina superior derecha */
+.product-card__favorite-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    z-index: 15;
+}
+
+.product-card__favorite-btn:hover {
+    transform: scale(1.1);
+    background-color: #ffffff;
+}
+
+.product-card__favorite-btn:active {
+    transform: scale(0.9);
+}
+
+.product-card__favorite-icon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: var(--color-text-muted);
+    stroke-width: 2;
+    transition: fill var(--transition-speed) ease, 
+                stroke var(--transition-speed) ease, 
+                transform var(--transition-speed) var(--transition-curve);
+}
+
+/* Favorito Activo */
+.product-card__favorite-btn--active .product-card__favorite-icon {
+    fill: var(--color-favorite-active);
+    stroke: var(--color-favorite-active);
+    animation: heart-pop 0.45s var(--transition-curve) forwards;
+}
+
+/* Animación de Latido/Escala para Favorito */
+@keyframes heart-pop {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.4);
+    }
+    60% {
+        transform: scale(0.85);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Contenido de la Tarjeta */
+.product-card__info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-card__title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.product-card__description {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+    flex-grow: 1;
+    /* Limitador de líneas para uniformidad de las cards */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Fila de Precio y Carrito */
+.product-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.product-card__price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+}
+
+.product-card__btn-cart {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 10px 18px;
+    border: none;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(190, 24, 93, 0.15);
+    transition: background-color var(--transition-speed) ease, 
+                box-shadow var(--transition-speed) ease, 
+                transform 0.1s ease;
+}
+
+.product-card__btn-cart:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: 0 6px 12px rgba(190, 24, 93, 0.25);
+}
+
+.product-card__btn-cart:active {
+    transform: scale(0.95);
+}

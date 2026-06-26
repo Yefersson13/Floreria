@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Atelier - Florería Premium. Diseños florales exclusivos y de alta calidad para cada ocasión.">
-    <title>Atelier | Florería Premium</title>
+        content="Atelier - Especial de Flores para el Día de la Madre. Los detalles más hermosos para celebrar a Mamá con amor infinito.">
+    <title>Atelier | Día de la Madre</title>
     <!-- Google Fonts: Playfair Display for headings, Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +14,9 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Local CSS -->
-    <link rel="stylesheet" href="./CSS/index.css">
+    <!-- Shared and Custom styles -->
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="stylesheet" href="../CSS/dia_de_la_madre.css">
 </head>
 
 <body>
@@ -29,11 +30,11 @@
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </div>
-                <a href="#nosotros" class="nav-text-link">Nosotros</a>
+                <a href="../index.html#nosotros" class="nav-text-link">Nosotros</a>
             </div>
 
             <div class="nav-center">
-                <a href="#" class="logo-brand">
+                <a href="../index.html" class="logo-brand">
                     <svg viewBox="0 0 240 70" class="brand-logo-svg" style="height: 48px; width: 160px;">
                         <!-- Left flourish ornament -->
                         <path d="M20,35 C30,20 45,20 55,35 C60,42 70,42 75,35 C80,30 85,25 95,35" fill="none"
@@ -57,7 +58,7 @@
             </div>
 
             <div class="nav-right">
-                <a href="#cart" class="nav-icon" id="cart-icon">
+                <a href="../index.html#cart" class="nav-icon" id="cart-icon">
                     <svg viewBox="0 0 24 24">
                         <path d="M5 9h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z" />
                         <path d="M9 9V6a3 3 0 0 1 6 0v3" />
@@ -69,114 +70,104 @@
                         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                     </svg>
                 </a>
-                <a href="#wishlist" class="nav-icon" id="heart-icon">
+                <a href="../index.html#wishlist" class="nav-icon" id="heart-icon">
                     <svg viewBox="0 0 24 24">
                         <path
                             d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
                 </a>
-                <!-- Mobile Menu Dropdown -->
-                <div class="mobile-menu-dropdown" id="mobileMenuDropdown">
-                    <div class="mobile-menu-section">
-                        <h3>Fechas especiales</h3>
-                        <ul>
-                            <li><a href="pages/dia_de_la_madre.html">Día de la madre</a></li>
-                            <li><a href="pages/dia_del_padre.html">Día del padre</a></li>
-                            <li><a href="pages/dia_del_maestro.html">Día del maestro</a></li>
-                            <li><a href="#">Día del niño</a></li>
-                            <li><a href="#">Ramos de novia</a></li>
-                        </ul>
-                    </div>
-                    <div class="mobile-menu-section">
-                        <h3>Ocasiones</h3>
-                        <ul>
-                            <li><a href="#">Cumpleaños</a></li>
-                            <li><a href="#">Graduaciones</a></li>
-                            <li><a href="#">Románticos</a></li>
-                            <li><a href="#">Nacimiento</a></li>
-                            <li><a href="#">Agradecimiento</a></li>
-                            <li><a href="#">Condolencias</a></li>
-                        </ul>
-                    </div>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div class="mobile-menu-dropdown" id="mobileMenuDropdown">
+                <div class="mobile-menu-section">
+                    <h3>Fechas especiales</h3>
+                    <ul>
+                        <li><a href="dia_de_la_madre.html">Día de la madre</a></li>
+                        <li><a href="dia_del_padre.html">Día del padre</a></li>
+                        <li><a href="dia_del_maestro.html">Día del maestro</a></li>
+                        <li><a href="#">Día del niño</a></li>
+                        <li><a href="#">Ramos de novia</a></li>
+                    </ul>
+                </div>
+                <div class="mobile-menu-section">
+                    <h3>Ocasiones</h3>
+                    <ul>
+                        <li><a href="#">Cumpleaños</a></li>
+                        <li><a href="#">Graduaciones</a></li>
+                        <li><a href="#">Románticos</a></li>
+                        <li><a href="#">Nacimiento</a></li>
+                        <li><a href="#">Agradecimiento</a></li>
+                        <li><a href="#">Condolencias</a></li>
+                    </ul>
                 </div>
             </div>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="inicio">
-        <div class="hero-card fade-in">
-            <img src="assets/images/mama_bouquet.png" class="hero-bg-img" alt="Atelier Arreglo Floral">
-            <div class="hero-text-side">
-                <h1 class="hero-title">
-                    <span class="light-text">Los</span> <span class="highlight-text">MEJORES</span><br>
-                    <span class="white-text">DETALLES</span> <span class="para-text">para</span><br>
-                    <span class="highlight-text mama-text">MAMÁ</span>
-                </h1>
-            </div>
+    <!-- Hero Section Split Layout -->
+    <section class="hero-mom animate-fade-up" id="inicio">
+        <!-- Left Side: mother and daughter photo -->
+        <div class="hero-mom-left">
+            <img src="../assets/images/fondo_diaDeLaMadre.jpg" class="hero-mom-img" alt="Madre e hija Atelier Florería">
         </div>
-    </section>
 
-    <!-- Mother's Day Promo Slider -->
-    <section class="promo-section section" id="promo-mama">
-        <div class="container grid promo-grid">
-            <div class="promo-info fade-in">
-                <h2 class="promo-title">Para: <span class="promo-highlight">MAMÁ</span></h2>
-                <div class="promo-price">129.90</div>
-                <p class="promo-description">
+        <!-- Right Side: Text elements with large watermark A background -->
+        <div class="hero-mom-right">
+            <div class="hero-mom-watermark">
+                <svg viewBox="0 0 240 240">
+                    <path
+                        d="M30,175 C45,100 55,75 75,45 C95,20 115,10 135,15 C155,20 162,50 167,70 C172,90 178,105 185,175"
+                        fill="none" stroke="var(--watermark-color)" stroke-width="1.2" opacity="0.65" />
+                    <path d="M55,75 C70,95 85,115 115,110 C145,105 130,85 115,78" fill="none"
+                        stroke="var(--watermark-color)" stroke-width="0.8" opacity="0.5" />
+                    <circle cx="115" cy="110" r="2.5" fill="var(--watermark-color)" opacity="0.6" />
+
+                    <!-- Flourishes -->
+                    <path d="M70,145 C85,145 100,147 135,145" fill="none" stroke="var(--watermark-color)"
+                        stroke-width="1.5" opacity="0.8" />
+                    <path d="M82,151 C92,142 115,151 125,142" fill="none" stroke="var(--watermark-color)"
+                        stroke-width="1.0" opacity="0.6" />
+                    <circle cx="108" cy="142" r="2" fill="var(--watermark-color)" opacity="0.6" />
+
+                    <!-- Central serif font letter A -->
+                    <text x="100" y="165" font-family="'Playfair Display', serif" font-weight="600" font-size="120"
+                        fill="var(--watermark-color)" opacity="0.8">A</text>
+
+                    <path d="M135,145 C142,135 145,138 150,145 M155,135 C162,148 172,135 178,148" fill="none"
+                        stroke="var(--watermark-color)" stroke-width="1.0" opacity="0.6" />
+                    <circle cx="166" cy="135" r="2" fill="var(--watermark-color)" opacity="0.5" />
+                </svg>
+            </div>
+
+            <div class="hero-mom-content">
+                <h2 class="hero-mom-subtitle">Para:</h2>
+                <h1 class="hero-mom-title">MAMÁ</h1>
+                <p class="hero-mom-desc">
                     Recordamos sus manos cuidándonos y su voz dándonos calma. Hoy es el momento de cuidar su corazón con
                     un detalle que hable de amor infinito y gratitud eterna. En Atelier, creamos cada arreglo pensando
                     en la magia única que solo mamá posee.
                 </p>
-                <a href="pages/dia_de_la_madre.html" class="btn btn-capsule btn-pink">Ver más</a>
-            </div>
-
-            <div class="promo-slider-container fade-in delay-1">
-                <button class="slider-arrow arrow-left" id="prev-promo"><i class="fa-solid fa-arrow-left"></i></button>
-                <div class="promo-slider">
-                    <!-- Card 1 -->
-                    <div class="slider-card">
-                        <div class="slider-card-img-wrapper">
-                            <img src="assets/images/arreglo1.jpeg" alt="Ramo para Mamá" class="slider-img">
-                            <div class="slider-card-overlay">
-                                <span class="ver-detalles-text">Ver detalles</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="slider-card">
-                        <div class="slider-card-img-wrapper">
-                            <img src="assets/images/arreglo2.png" alt="Arreglo con Globo Mamá" class="slider-img">
-                            <div class="slider-card-overlay">
-                                <span class="ver-detalles-text">Ver detalles</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="slider-arrow arrow-right" id="next-promo"><i
-                        class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
     </section>
 
-    <!-- Catalog Section -->
+    <!-- Product Catalog Section -->
     <section class="collection section" id="coleccion">
         <div class="container">
-            <div class="section-header text-center fade-in">
-                <h2>Nuestro Catálogo</h2>
-            </div>
-
-            <!-- Session Confirm Logout Box -->
+            <!-- Logout Session Confirmation Overlay -->
             <div class="opcion_sesion">
                 <p>¿Desea Salir de la Sesión?</p>
                 <div class="opc_btn">
                     <button class="opc_ses btn_cerSi">Cancelar</button>
-                    <button class="opc_ses btn_cerNo" onclick="window.location.href='index.html'">Cerrar Sesión</button>
+                    <button class="opc_ses btn_cerNo" onclick="window.location.href='../index.html'">Cerrar
+                        Sesión</button>
                 </div>
             </div>
 
-            <!-- Register Form Overlay -->
+            <!-- Register Overlay Modal Form -->
             <div class="form-overlay-container">
-                <form id="Regis_for" action="./php/registro.php" method="post" class="Inicio">
+                <form id="Regis_for" action="../php/registro.php" method="post" class="Inicio">
                     <div class="form-header">
                         <h3>Registrarse</h3>
                         <span class="close-form-btn">&times;</span>
@@ -202,9 +193,9 @@
                 </form>
             </div>
 
-            <!-- Login Form Overlay -->
+            <!-- Login Overlay Modal Form -->
             <div class="form-overlay-container">
-                <form id="Inicio_for" action="./php/login.php" method="post" class="Inicio-F">
+                <form id="Inicio_for" action="../php/login.php" method="post" class="Inicio-F">
                     <div class="form-header">
                         <h3>Iniciar Sesión</h3>
                         <span class="close-form-btn">&times;</span>
@@ -222,21 +213,21 @@
                 </form>
             </div>
 
-            <!-- Catalog Product Grid -->
+            <!-- Grid Layout of Mother's Day Flowers -->
             <div class="grid collection-grid">
                 <!-- Product 1 -->
                 <div class="product-card fade-in">
                     <div class="product-img-wrapper">
                         <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
-                        <img src="assets/images/cesto_lilas.png" alt="Cesto Lilas" class="product-img">
+                        <img src="../assets/images/cesto_lilas.png" alt="Cesto Rosas" class="product-img">
                         <div class="product-overlay">
                             <span class="ver-detalles-text">Ver detalles</span>
                         </div>
                     </div>
                     <div class="product-info">
-                        <h3>Cesto Lilas</h3>
+                        <h3>Cesto Rosas</h3>
                         <p class="desc">Cesto elegante de flores en tonos lilas y blancos</p>
-                        <p class="price">S/ 149.90</p>
+                        <p class="price">149.90</p>
                         <button class="btnComprar btn btn-agregar">Agregar</button>
                     </div>
                 </div>
@@ -245,7 +236,7 @@
                 <div class="product-card fade-in delay-1">
                     <div class="product-img-wrapper">
                         <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
-                        <img src="assets/images/florero_encanto.png" alt="Florero Encanto" class="product-img">
+                        <img src="../assets/images/florero_encanto.png" alt="Florero Encanto" class="product-img">
                         <div class="product-overlay">
                             <span class="ver-detalles-text">Ver detalles</span>
                         </div>
@@ -253,7 +244,7 @@
                     <div class="product-info">
                         <h3>Florero Encanto</h3>
                         <p class="desc">Cesto elegante de flores en tonos lilas y blancos</p>
-                        <p class="price">S/ 149.90</p>
+                        <p class="price">149.90</p>
                         <button class="btnComprar btn btn-agregar">Agregar</button>
                     </div>
                 </div>
@@ -262,7 +253,8 @@
                 <div class="product-card fade-in delay-2">
                     <div class="product-img-wrapper">
                         <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
-                        <img src="assets/images/box_rosas_claveles.png" alt="Box Rosas y Claveles" class="product-img">
+                        <img src="../assets/images/box_rosas_claveles.png" alt="Box Rosas y Claveles"
+                            class="product-img">
                         <div class="product-overlay">
                             <span class="ver-detalles-text">Ver detalles</span>
                         </div>
@@ -270,7 +262,7 @@
                     <div class="product-info">
                         <h3>Box Rosas y Claveles</h3>
                         <p class="desc">Cesto elegante de flores en tonos lilas y blancos</p>
-                        <p class="price">S/ 129.90</p>
+                        <p class="price">129.90</p>
                         <button class="btnComprar btn btn-agregar">Agregar</button>
                     </div>
                 </div>
@@ -279,7 +271,7 @@
                 <div class="product-card fade-in delay-3">
                     <div class="product-img-wrapper">
                         <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
-                        <img src="assets/images/ramo_coreano_lilas.png" alt="Ramo Coreano Lilas" class="product-img">
+                        <img src="../assets/images/ramo_coreano_lilas.png" alt="Ramo Coreano Lilas" class="product-img">
                         <div class="product-overlay">
                             <span class="ver-detalles-text">Ver detalles</span>
                         </div>
@@ -287,7 +279,7 @@
                     <div class="product-info">
                         <h3>Ramo Coreano Lilas</h3>
                         <p class="desc">Cesto elegante de flores en tonos lilas y blancos</p>
-                        <p class="price">S/ 129.90</p>
+                        <p class="price">129.90</p>
                         <button class="btnComprar btn btn-agregar">Agregar</button>
                     </div>
                 </div>
@@ -295,29 +287,10 @@
         </div>
     </section>
 
-    <!-- About / Why Us Section -->
-    <section class="about-why-us section" id="nosotros">
-        <div class="container why-us-wrapper fade-in">
-            <div class="why-us-card">
-                <img src="assets/images/backgorundAtlr.jpg" class="why-us-bg-img" alt="¿Por qué elegirnos?">
-                <div class="why-us-content">
-                    <h2 class="why-us-title"><em>¿Por qué</em> <span class="highlight">ELEGIRNOS?</span></h2>
-                    <p class="why-us-description">
-                        Recordamos sus manos cuidándonos y su voz dándonos calma. Hoy es el momento de cuidar su corazón
-                        con un detalle que hable de amor infinito y gratitud eterna. En Atelier, creamos cada arreglo
-                        pensando en la magia única que solo mamá posee.
-                    </p>
-                    <div class="why-us-logo"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Footer section with themed Mother's Day details -->
+    <footer class="footer footer-mom">
         <div class="container">
-            <!-- Footer Logo / Brand at Top -->
+            <!-- Brand Logo centered at top -->
             <div class="footer-brand">
                 <div class="footer-logo-brand">
                     <span class="logo-title">ATELIER</span>
@@ -325,20 +298,20 @@
                 </div>
             </div>
 
-            <!-- Main Content Grid -->
+            <!-- Links grid columns -->
             <div class="footer-grid">
-                <!-- Column 1: ATELIER -->
+                <!-- Column 1 -->
                 <div class="footer-col">
                     <h3>ATELIER</h3>
                     <ul>
-                        <li><a href="#nosotros">Nosotros</a></li>
-                        <li><a href="#inicio">Atelier Florería</a></li>
+                        <li><a href="../index.html#nosotros">Nosotros</a></li>
+                        <li><a href="../index.html#inicio">Atelier Florería</a></li>
                         <li><a href="#">Certificación OEA</a></li>
                         <li><a href="#">Tiendas</a></li>
                     </ul>
                 </div>
 
-                <!-- Column 2: Atención al cliente -->
+                <!-- Column 2 -->
                 <div class="footer-col">
                     <h3>Atención al cliente</h3>
                     <ul>
@@ -350,7 +323,7 @@
                     </ul>
                 </div>
 
-                <!-- Column 3: Contáctanos -->
+                <!-- Column 3 -->
                 <div class="footer-col">
                     <h3>Contáctanos</h3>
                     <p style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
@@ -366,7 +339,7 @@
                     </div>
                 </div>
 
-                <!-- Column 4: Información -->
+                <!-- Column 4 -->
                 <div class="footer-col">
                     <h3>Información</h3>
                     <p style="color: #2C302E; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6;">
@@ -382,7 +355,7 @@
             </div>
         </div>
 
-        <!-- Bottom copyright bar -->
+        <!-- Copyright legal bar -->
         <div class="footer-bottom">
             <div class="container footer-bottom-container">
                 <span class="footer-copy">ATELIER &copy;2026</span>
@@ -392,14 +365,14 @@
             </div>
         </div>
     </footer>
+
+    <!-- Interactive script bundles -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="../Js/script.js"></script>
+    <script type="text/javascript" src="../Js/funciones.js"></script>
 
-
-    <!-- Local Script -->
-    <script src="./Js/script.js"></script>
-    <script type="text/javascript" src="./Js/funciones.js"></script>
 </body>
 
 </html>
