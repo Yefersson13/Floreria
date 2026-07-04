@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arquitectura de Software: DAO, MVC, TDD, SOLID</title>
+    <style>
+        /* Estilos optimizados para Microsoft Word */
+        @page {
+            size: A4;
+            margin: 2.5cm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #2d3748;
+            line-height: 1.6;
+            font-size: 11pt;
+        }
+        h1, h2, h3, h4 {
+            color: #1a365d;
+            font-family: 'Georgia', serif;
+        }
+        h1 {
+            font-size: 24pt;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 5px;
+            margin-top: 24pt;
+            margin-bottom: 12pt;
+        }
+        h2 {
+            font-size: 18pt;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 3px;
+            margin-top: 18pt;
+            margin-bottom: 9pt;
+            page-break-after: avoid;
+        }
+        h3 {
+            font-size: 14pt;
+            margin-top: 14pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+        }
+        p {
+            margin-bottom: 10pt;
+            text-align: justify;
+        }
+        .cover-page {
+            text-align: center;
+            height: 100%;
+            margin-top: 5cm;
+            page-break-after: always;
+        }
+        .cover-title {
+            font-size: 32pt;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 10px;
+        }
+        .cover-subtitle {
+            font-size: 18pt;
+            color: #4a5568;
+            margin-bottom: 5cm;
+        }
+        .cover-metadata {
+            font-size: 12pt;
+            color: #718096;
+            margin-top: 3cm;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+        pre {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #3182ce;
+            padding: 10px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 9.5pt;
+            line-height: 1.3;
+            margin-bottom: 12pt;
+            white-space: pre-wrap;
+        }
+        .highlight {
+            background-color: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 10px;
+            margin-bottom: 12pt;
+        }
+        .highlight-title {
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-bottom: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12pt;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px;
+            text-align: left;
+            font-size: 10pt;
+        }
+        th {
+            background-color: #f7fafc;
+            color: #2d3748;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTADA -->
+    <div class="cover-page">
+        <div class="cover-title">Arquitectura de Software</div>
+        <div class="cover-subtitle">Implementación Práctica de DAO, MVC, TDD y SOLID</div>
+        <div class="cover-metadata">
+            <strong>Proyecto:</strong> Vean / Atelier Florería Premium<br>
+            <strong>Tecnología:</strong> PHP Estructurado a Programación Orientada a Objetos (POO)<br>
+            <strong>Fecha de Creación:</strong> Junio 2026
+        </div>
+    </div>
+
+    <!-- PÁGINA 1: INTRODUCCIÓN -->
+    <div class="page-break">
+        <h1>Introducción</h1>
+        <p>El desarrollo de software moderno requiere no solo que las aplicaciones funcionen, sino que también sean mantenibles, legibles, escalables y fáciles de probar. En este documento se presenta un análisis detallado sobre cómo se han estructurado los patrones <strong>MVC</strong>, <strong>DAO</strong>, la metodología <strong>TDD</strong> y los principios de diseño <strong>SOLID</strong> en el proyecto <strong>Vean (Atelier Florería Premium)</strong>.</p>
+        <p>Tradicionalmente, las aplicaciones PHP de nivel inicial mezclan consultas a la base de datos (SQL), lógica de negocio, y maquetación visual (HTML) dentro de un solo archivo (código espagueti). Esto crea problemas graves a medida que el proyecto crece:</p>
+        <ul>
+            <li><strong>Falta de reusabilidad:</strong> Duplicación de código de conexión y consultas SQL.</li>
+            <li><strong>Baja seguridad:</strong> SQL inyecciones debido al uso de consultas directas sin escapar.</li>
+            <li><strong>Imposibilidad de realizar pruebas:</strong> No se puede probar la lógica de inicio de sesión sin tener la base de datos MySQL activa y llena de datos reales.</li>
+        </ul>
+        <p>Mediante este refactor, se demuestra paso a paso cómo ordenar el sistema para solventar estas deficiencias utilizando una arquitectura orientada a objetos sumamente limpia y didáctica.</p>
+    </div>
+
+    <!-- PÁGINA 2: MVC -->
+    <div class="page-break">
+        <h2>1. Patrón de Diseño MVC (Modelo-Vista-Controller)</h2>
+        <p>El patrón <strong>MVC</strong> organiza el código de la aplicación separándolo en tres capas con responsabilidades muy distintas:</p>
+        
+        <h3>A. El Modelo (Model)</h3>
+        <p>El Modelo representa los datos de la aplicación y las reglas de negocio primarias. Contiene el estado del dominio y no conoce nada sobre la interfaz visual o los protocolos HTTP.</p>
+        <p>En el proyecto, la clase <strong>User</strong> (ubicada en <code>src/Model/User.php</code>) es la entidad que representa los datos de un usuario:</p>
+        <pre>class User {
+    private ?int $id;
+    private string $usuario;
+    private string $contraseña;
+    private string $correo;
+    private string $telefono;
+    private string $rol;
+
+    public function __construct($usuario, $contraseña, $correo, $telefono, $rol = 'cliente', $id = null) { ... }
+    
+    // Getters y Setters...
+}</pre>
+
+        <h3>B. La Vista (View)</h3>
+        <p>La Vista es el componente visual encargado de renderizar y mostrar la información al usuario en pantalla.</p>
+        <p>En el proyecto, la vista está conformada por:</p>
+        <ul>
+            <li><strong>index.html:</strong> Contiene los formularios visuales de inicio de sesión y registro de clientes.</li>
+            <li><strong>pagina.php:</strong> Muestra la interfaz de bienvenida una vez iniciada la sesión activa.</li>
+        </ul>
+
+        <h3>C. El Controlador (Controller)</h3>
+        <p>El Controlador actúa como intermediario. Recibe los inputs de la vista (parámetros POST), interactúa con los modelos y DAOs para aplicar la lógica, y luego indica a la vista qué mostrar.</p>
+        <p>La clase <strong>AuthController</strong> (en <code>src/Controller/AuthController.php</code>) contiene los métodos <code>login()</code> y <code>register()</code>, encargados de la validación y toma de decisiones.</p>
+    </div>
+
+    <!-- PÁGINA 3: DAO -->
+    <div class="page-break">
+        <h2>2. Patrón de Diseño DAO (Data Access Object)</h2>
+        <p>El patrón <strong>DAO</strong> consiste en aislar por completo el origen de datos (base de datos MySQL, archivos JSON, memoria) del resto de la aplicación. Para lograrlo, se define un contrato o interfaz de acceso, y luego clases concretas que lo implementan.</p>
+        
+        <div class="highlight">
+            <div class="highlight-title">Beneficio Principal del DAO:</div>
+            Si cambias tu base de datos de MySQL a PostgreSQL, SQLite o inclusive a llamadas de una API REST externa, solo necesitas escribir un nuevo DAO que cumpla con la interfaz. El controlador no sufrirá ningún cambio.
+        </div>
+
+        <h3>La Interfaz DAO:</h3>
+        <p>Ubicada en <code>src/DAO/UserDAOInterface.php</code>, define las únicas operaciones que el sistema requiere sobre los usuarios:</p>
+        <pre>interface UserDAOInterface {
+    public function findByEmail(string $email): ?User;
+    public function findByUsername(string $username): ?User;
+    public function save(User $user): bool;
+}</pre>
+
+        <h3>Implementaciones del DAO en el proyecto:</h3>
+        <table>
+            <tr>
+                <th>Clase</th>
+                <th>Propósito</th>
+                <th>Almacenamiento</th>
+            </tr>
+            <tr>
+                <td><strong>MySQLUserDAO</strong></td>
+                <td>Acceso a datos de producción en el servidor local.</td>
+                <td>MySQL (Base de datos real vía PDO)</td>
+            </tr>
+            <tr>
+                <td><strong>MockUserDAO</strong></td>
+                <td>Utilizado para pruebas unitarias. Rápido y determinista.</td>
+                <td>Memoria volátil (Arrays PHP en ejecución)</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- PÁGINA 4: SOLID S, O, L -->
+    <div class="page-break">
+        <h2>3. Principios SOLID en Acción</h2>
+        <p>Los principios <strong>SOLID</strong> nos ayudan a escribir código mantenible y flexible. A continuación, se detalla cómo se aplica cada principio en el proyecto refactorizado:</p>
+
+        <h3>S - Single Responsibility Principle (Responsabilidad Única)</h3>
+        <p><em>"Una clase debe tener una única razón para cambiar."</em></p>
+        <p>Cada clase en el nuevo diseño realiza una sola tarea bien delimitada:</p>
+        <ul>
+            <li><code>Connection</code>: Únicamente configura y provee la conexión PDO.</li>
+            <li><code>User</code>: Únicamente guarda y estructura los atributos del usuario.</li>
+            <li><code>MySQLUserDAO</code>: Únicamente traduce las consultas SQL.</li>
+            <li><code>AuthController</code>: Únicamente ejecuta la lógica de validación de autenticación.</li>
+        </ul>
+
+        <h3>O - Open/Closed Principle (Abierto/Cerrado)</h3>
+        <p><em>"Las clases deben estar abiertas para la extensión, pero cerradas para la modificación."</em></p>
+        <p>Si decidimos añadir una base de datos Firebase, no modificamos la clase <code>AuthController</code>. La extendemos creando una nueva clase <code>FirebaseUserDAO</code>. El controlador permanece intacto ya que interactúa solo con la interfaz común.</p>
+
+        <h3>L - Liskov Substitution Principle (Sustitución de Liskov)</h3>
+        <p><em>"Las clases hijas o implementaciones deben poder sustituir a sus clases padres o interfaces sin alterar el comportamiento del programa."</em></p>
+        <p>Tanto <code>MySQLUserDAO</code> como <code>MockUserDAO</code> implementan la misma interfaz. En el script de pruebas unitarias sustituimos la base de datos MySQL por la base de datos en memoria (Mock) y el <code>AuthController</code> funciona a la perfección, sin percibir la diferencia.</p>
+    </div>
+
+    <!-- PÁGINA 5: SOLID I, D y TDD -->
+    <div class="page-break">
+        <h3>I - Interface Segregation Principle (Segregación de Interfaces)</h3>
+        <p><em>"Muchas interfaces específicas son mejores que una sola interfaz general."</em></p>
+        <p>La interfaz <code>UserDAOInterface</code> contiene únicamente métodos relevantes a la administración de usuarios. Si tuviéramos lógica de inventario de arreglos florales, crearíamos un <code>FlowerDAOInterface</code> independiente, en lugar de saturar una única interfaz con métodos mixtos.</p>
+
+        <h3>D - Dependency Inversion Principle (Inversión de Dependencias)</h3>
+        <p><em>"Los módulos de alto nivel no deben depender de módulos de bajo nivel. Ambos deben depender de abstracciones."</em></p>
+        <p>El controlador de autenticación no instancia directamente a <code>MySQLUserDAO</code> (bajo nivel). En su lugar, el controlador depende de la interfaz <code>UserDAOInterface</code> (abstracción) y se le inyecta la implementación mediante su constructor:</p>
+        <pre>class AuthController {
+    private UserDAOInterface $userDAO;
+
+    // Inyección de Dependencias
+    public function __construct(UserDAOInterface $userDAO) {
+        $this->userDAO = $userDAO;
+    }
+}</pre>
+
+        <h2>4. Metodología TDD (Test-Driven Development)</h2>
+        <p><strong>TDD</strong> es un enfoque de desarrollo donde las pruebas de software se escriben antes del código de implementación. Esto nos obliga a entender claramente los requerimientos y diseñar interfaces limpias antes de programar.</p>
+        <p>En el proyecto, hemos creado un motor de pruebas unitarias nativo en <code>tests/run_tests.php</code> que permite ejecutar validaciones automáticas simulando el almacenamiento mediante el <code>MockUserDAO</code>. Un ejemplo de prueba para validar el registro duplicado:</p>
+        <pre>// Guardar usuario previo
+$mockDAO->save(new User('Pedro', '123', 'pedro@test.com', '123456'));
+
+// Intentar registrar el mismo nombre de usuario
+$response = $controller->register('Pedro', 'otro@test.com', '988888888', 'OtraContra');
+
+// Afirmación
+assertFalse($response['success'], 'Debe fallar al registrar usuario duplicado.');</pre>
+        <p>Esto permite a cualquier desarrollador realizar cambios y refactorizaciones con la total seguridad de que si comete un error, el script de pruebas fallará inmediatamente.</p>
+    </div>
+
+    <!-- PÁGINA 6: CONCLUSIÓN -->
+    <div class="page-break">
+        <h2>Conclusión</h2>
+        <p>La migración de un diseño estructurado directo a una arquitectura basada en <strong>DAO, MVC, SOLID y TDD</strong> aporta múltiples ventajas operativas y académicas:</p>
+        <ol>
+            <li><strong>Seguridad por Defecto:</strong> La sustitución de variables inyectadas directamente en strings de consulta SQL por sentencias preparadas de <strong>PDO</strong> elimina la vulnerabilidad de inyección SQL.</li>
+            <li><strong>Modularidad Extrema:</strong> Al separar la lógica visual, la de negocio y la de base de datos, el código es comprensible a simple vista y mucho más fácil de modificar por varios desarrolladores simultáneamente.</li>
+            <li><strong>Facilidad de Testeo:</strong> Gracias a la Inversión de Dependencias (DIP) y el patrón DAO, es posible escribir simuladores de bases de datos para probar la aplicación de manera instantánea y robusta.</li>
+        </ol>
+        <p>Esta implementación representa un pilar fundamental para aprender a desarrollar software a nivel profesional utilizando lenguajes populares como PHP.</p>
+    </div>
+
+</body>
+</html>

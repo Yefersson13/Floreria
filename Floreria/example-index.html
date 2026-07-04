@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!--
+ * @file example-index.html
+ * @description Página de demostración del catálogo de productos y modal interactivo.
+ * Responsabilidad: Servir de contenedor principal y coordinar el arranque del MVC JS.
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Flora | Boutique de Flores Premium</title>
+    
+    <!-- Hojas de Estilos de Componentes -->
+    <link rel="stylesheet" href="assets/css/product-card.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    
+    <!-- Estilos de la Demostración General -->
+    <style>
+        :root {
+            --color-bg-page: #fafaf9;
+            --color-text-header: #0f172a;
+            --color-header-bg: rgba(255, 255, 255, 0.85);
+            --font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-bg-page);
+            color: var(--color-text-dark);
+            font-family: var(--font-family);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Premium con Blur */
+        .site-header {
+            position: sticky;
+            top: 0;
+            background-color: var(--color-header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f1f5f9;
+            z-index: 100;
+            padding: 16px 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .site-header__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-header__logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .site-header__logo span {
+            color: var(--color-text-header);
+        }
+
+        .site-header__nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        /* Contadores en Header */
+        .nav-btn {
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: #f1f5f9;
+        }
+
+        .nav-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: var(--color-text-header);
+            stroke-width: 2;
+        }
+
+        .nav-btn__badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background-color: var(--color-primary);
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #ffffff;
+        }
+
+        /* Hero Banner */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fef3c7 100%);
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .hero__title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-text-header);
+            margin: 0 0 12px 0;
+        }
+
+        .hero__subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Grid de Productos */
+        .catalog-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+            flex-grow: 1;
+        }
+
+        .catalog-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 28px;
+            color: var(--color-text-header);
+            border-left: 4px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        /* Notificación Toast */
+        .toast-notification {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--color-text-header);
+            color: #ffffff;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .toast-notification--show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 24px;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Principal -->
+    <header class="site-header">
+        <div class="site-header__container">
+            <a href="#" class="site-header__logo">Bella<span>Flora</span></a>
+            <div class="site-header__nav">
+                <!-- Botón de Favoritos Reactivo -->
+                <button class="nav-btn" aria-label="Favoritos">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <span class="nav-btn__badge" id="fav-count">0</span>
+                </button>
+
+                <!-- Botón de Carrito Reactivo -->
+                <button class="nav-btn" aria-label="Carrito de compras">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                    <span class="nav-btn__badge" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Hero -->
+    <section class="hero">
+        <h1 class="hero__title">Flores que Cuentan Historias</h1>
+        <p class="hero__subtitle">Elige entre nuestros arreglos florales de lujo diseñados por floristas expertos para iluminar cualquier ocasión especial.</p>
+    </section>
+
+    <!-- Sección del Catálogo -->
+    <main class="catalog-container">
+        <h2 class="catalog-title">Colección Exclusiva</h2>
+        <div class="products-grid" id="products-grid">
+            <!-- Cargado dinámicamente mediante MVC JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Bella Flora Boutique. Todos los derechos reservados. Diseñado con MVC y patrones de arquitectura limpia.</p>
+    </footer>
+
+    <!-- Script de Inicio MVC (ES Modules) -->
+    <script type="module">
+        import ProductController from './assets/js/controllers/ProductController.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridContainer = document.getElementById('products-grid');
+            const controller = new ProductController(gridContainer);
+            
+            // Inicializa la carga de productos de la API
+            controller.init();
+
+            // Referencias del Header
+            const favBadge = document.getElementById('fav-count');
+            const cartBadge = document.getElementById('cart-count');
+            let cartItemsCount = 0;
+
+            /**
+             * Calcula el total de favoritos leídos del localStorage y actualiza la burbuja del header.
+             */
+            const updateFavBadge = () => {
+                let count = 0;
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && key.startsWith('favorites_')) {
+                        count++;
+                    }
+                }
+                favBadge.textContent = count;
+            };
+
+            // Lectura inicial de favoritos al cargar
+            updateFavBadge();
+
+            // Escuchar el CustomEvent 'favoriteToggled' emitido por el FavoriteService
+            window.addEventListener('favoriteToggled', () => {
+                updateFavBadge();
+            });
+
+            // Escuchar el CustomEvent 'cartUpdated' emitido por el ProductController
+            window.addEventListener('cartUpdated', (e) => {
+                const { product, quantity } = e.detail;
+                cartItemsCount += quantity;
+                cartBadge.textContent = cartItemsCount;
+                
+                // Muestra un toast para dar feedback visual premium al usuario
+                showToast(`¡Se agregaron ${quantity} x "${product.name}" al carrito!`);
+            });
+
+            /**
+             * Muestra una notificación temporal en pantalla.
+             * @param {string} message
+             */
+            function showToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'toast-notification';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                
+                // Triger de animación
+                setTimeout(() => toast.classList.add('toast-notification--show'), 50);
+                
+                // Auto removido
+                setTimeout(() => {
+                    toast.classList.remove('toast-notification--show');
+                    setTimeout(() => toast.remove(), 350);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
