@@ -2041,6 +2041,7 @@ img {
     font-size: 1.05rem;
     font-weight: 700;
     color: #0f172a;
+    appearance: textfield;
     -moz-appearance: textfield;
 }
 

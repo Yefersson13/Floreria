@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // 0. Detectar si estamos en la landing pública (index.html).
+    // En esta página NO existe carrito de compras: los botones de compra
+    // deben invitar a iniciar sesión o registrarse (el carrito real vive en pagina.php).
+    const currentPath = window.location.pathname.toLowerCase();
+    const isIndexLanding = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('/');
+
     // 1. Mobile Menu Toggle (Anclado exactamente debajo del icono |||)
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.getElementById('mobileMenuDropdown');
@@ -215,6 +221,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.atelierAddToCart = function(name, priceStr, img, subtitle = "Colección Exclusiva", qty = 1) {
+        if (isIndexLanding) {
+            // En index.html no existe carrito: cualquier intento de agregar
+            // productos (venga de donde venga) invita a iniciar sesión/registrarse.
+            openLoginForm();
+            showLuxuryToast('🔒 <span>Inicia sesión o regístrate para agregar productos a tu carrito</span>');
+            return;
+        }
         let cartItems = JSON.parse(localStorage.getItem('atelier_cart_items') || '[]');
         let priceNum = typeof priceStr === 'number' ? priceStr : parseFloat(String(priceStr).replace(/[^\d.]/g, '')) || 149.90;
         
@@ -577,8 +590,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Asegurar que exista el botón circular en la parte inferior derecha en TODAS las páginas (excepto pasarela)
-    if (!window.location.pathname.toLowerCase().includes('pasarela')) {
+    if (isIndexLanding) {
+        // En index.html NO hay carrito de compras: los botones "Agregar"/"Comprar"
+        // invitan a iniciar sesión o registrarse. El carrito real vive en pagina.php.
+        botones.forEach(boton => {
+            boton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openLoginForm();
+                showLuxuryToast('🔒 <span>Inicia sesión o regístrate para agregar productos a tu carrito</span>');
+            });
+        });
+    } else if (!window.location.pathname.toLowerCase().includes('pasarela')) {
+        // Asegurar que exista el botón circular en la parte inferior derecha (excepto pasarela e index)
         let floatingCart = document.getElementById('floating-cart');
         if (!floatingCart) {
             floatingCart = document.createElement('div');
@@ -838,6 +862,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navCart) {
         navCart.addEventListener('click', (e) => {
             e.preventDefault();
+            if (isIndexLanding) {
+                openLoginForm();
+                showLuxuryToast('🔒 <span>Inicia sesión o regístrate para ver tu carrito</span>');
+                return;
+            }
             if (typeof window.openAtelierSideCart === 'function') {
                 window.openAtelierSideCart();
             } else {
@@ -1026,6 +1055,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Botón Agregar al Carrito dentro del modal
     pmAddBtn.addEventListener('click', () => {
+        if (isIndexLanding) {
+            closeProductModal();
+            openLoginForm();
+            showLuxuryToast('🔒 <span>Inicia sesión o regístrate para agregar productos a tu carrito</span>');
+            return;
+        }
         let qty = parseInt(pmQtyVal.value || '1', 10);
         let priceNum = parseFloat(pmPrice.textContent.replace(/[^\d.]/g, '')) || 149.90;
         window.atelierAddToCart(activeModalProdName, priceNum, pmMainImg.src, pmBadge ? pmBadge.textContent : "Colección Exclusiva", qty);

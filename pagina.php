@@ -74,22 +74,23 @@ if (is_string($nombreCliente)) {
                     </svg>
                 </a>
                 <?php if ($nombreCliente && trim($nombreCliente) !== ''): ?>
-                <a href="#" class="nav-user-logged cerrar_ses" id="user-icon" title="Sesión activa: <?= htmlspecialchars($nombreCliente) ?>">
-                    <div class="user-pill">
-                        <svg viewBox="0 0 24 24" class="user-pill-svg">
+                    <a href="#" class="nav-user-logged cerrar_ses" id="user-icon"
+                        title="Sesión activa: <?= htmlspecialchars($nombreCliente) ?>">
+                        <div class="user-pill">
+                            <svg viewBox="0 0 24 24" class="user-pill-svg">
+                                <circle cx="12" cy="7" r="4" />
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                            </svg>
+                            <span class="user-pill-name"><?= htmlspecialchars($nombreCliente) ?></span>
+                        </div>
+                    </a>
+                <?php else: ?>
+                    <a href="#" class="nav-icon" id="user-icon">
+                        <svg viewBox="0 0 24 24">
                             <circle cx="12" cy="7" r="4" />
                             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                         </svg>
-                        <span class="user-pill-name"><?= htmlspecialchars($nombreCliente) ?></span>
-                    </div>
-                </a>
-                <?php else: ?>
-                <a href="#" class="nav-icon" id="user-icon">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="7" r="4" />
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                    </svg>
-                </a>
+                    </a>
                 <?php endif; ?>
                 <a href="#wishlist" class="nav-icon" id="heart-icon">
                     <svg viewBox="0 0 24 24">
@@ -189,10 +190,14 @@ if (is_string($nombreCliente)) {
 
             <!-- Session Confirm Logout Box -->
             <div class="opcion_sesion">
-                <p><i class="fa-solid fa-circle-user" style="color: var(--primary); font-size: 1.5rem; margin-bottom: 8px; display: block;"></i>¿Desea cerrar su sesión<?= $nombreCliente ? ' (' . htmlspecialchars($nombreCliente) . ')' : '' ?>?</p>
+                <p><i class="fa-solid fa-circle-user"
+                        style="color: var(--primary); font-size: 1.5rem; margin-bottom: 8px; display: block;"></i>¿Desea
+                    cerrar su sesión<?= $nombreCliente ? ' (' . htmlspecialchars($nombreCliente) . ')' : '' ?>?</p>
                 <div class="opc_btn">
                     <button class="opc_ses btn_cerSi">Cancelar</button>
-                    <button class="opc_ses btn_cerNo" onclick="if(typeof window.atelierLogout==='function'){window.atelierLogout(event);}else{window.location.href='php/logout.php';}return false;">Cerrar Sesión</button>
+                    <button class="opc_ses btn_cerNo"
+                        onclick="if(typeof window.atelierLogout==='function'){window.atelierLogout(event);}else{window.location.href='php/logout.php';}return false;">Cerrar
+                        Sesión</button>
                 </div>
             </div>
 
@@ -211,7 +216,7 @@ if (is_string($nombreCliente)) {
                         <label for="email">Correo Electrónico</label>
                         <input type="email" id="email" required placeholder="ejemplo@email.com" name="correo">
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" s>
                         <label for="telefono">Teléfono</label>
                         <input type="tel" id="telefono" required name="telefono">
                     </div>
