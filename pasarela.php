@@ -1009,12 +1009,55 @@ if (is_string($nombreUsuario)) {
             }
         }
 
-        function finalizarPedidoAtelier() {
-            const modal = document.getElementById('modal-pedido-exitoso');
-            if (modal) {
-                modal.style.display = 'flex';
-                localStorage.removeItem('atelier_cart_items');
-                localStorage.setItem('atelier_cart_qty', '0');
+        async function finalizarPedidoAtelier() {
+            const items = getPasarelaCartItems();
+            if (!items || items.length === 0) {
+                alert('Tu carrito está vacío. Agrega productos antes de confirmar.');
+                return;
+            }
+
+            // Recoger datos del formulario de datos personales
+            const usuario = (document.getElementById('p-nombre')?.value || '').trim();
+            const correo  = (document.getElementById('p-correo')?.value  || '').trim();
+
+            if (!usuario || !correo) {
+                alert('Por favor completa tu nombre y correo electrónico en el Paso 2 (Datos Personales).');
+                switchPasarelaStep(2);
+                return;
+            }
+
+            // Preparar payload
+            const payload = { usuario, correo, items };
+
+            // Deshabilitar botón mientras se procesa
+            const btnFinalizar = document.querySelector('#step-view-4 .pasarela-btn-comprar[onclick*="finalizarPedido"]');
+            if (btnFinalizar) { btnFinalizar.disabled = true; btnFinalizar.textContent = '⏳ Procesando...'; }
+
+            try {
+                const resp = await fetch('api/guardar_compra.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await resp.json();
+
+                if (result.success) {
+                    // Compra guardada — limpiar carrito y mostrar modal
+                    localStorage.removeItem('atelier_cart_items');
+                    localStorage.setItem('atelier_cart_qty', '0');
+
+                    const modal = document.getElementById('modal-pedido-exitoso');
+                    if (modal) modal.style.display = 'flex';
+                } else {
+                    console.error('Error al guardar compra:', result);
+                    alert('Hubo un problema al registrar tu pedido: ' + (result.message || 'Error desconocido'));
+                    if (btnFinalizar) { btnFinalizar.disabled = false; btnFinalizar.innerHTML = '💐 Pagar y Confirmar Pedido <span id="btn-final-total-text"></span>'; renderPasarelaItems(); }
+                }
+            } catch (err) {
+                console.error('Error de red al guardar compra:', err);
+                alert('Error de conexión. Por favor intenta nuevamente.');
+                if (btnFinalizar) { btnFinalizar.disabled = false; btnFinalizar.innerHTML = '💐 Pagar y Confirmar Pedido <span id="btn-final-total-text"></span>'; renderPasarelaItems(); }
             }
         }
     </script>
