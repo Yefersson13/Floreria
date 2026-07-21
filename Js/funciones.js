@@ -136,7 +136,9 @@ $(document).ready(function(){
 
             sessionStorage.setItem('atelier_toast_success', "¡Registro Exitoso! Bienvenido a Atelier, " + nombre + ".");
             // En servidores estáticos (Live Server), recargamos index.html para evitar la descarga del archivo .php
-            window.location.href = "index.html";
+            const regPath = window.location.pathname.toLowerCase();
+            const regRedirect = (regPath.includes('/pages/') || regPath.includes('\\pages\\')) ? '../index.html' : 'index.html';
+            window.location.href = regRedirect;
         }
     });
 
@@ -158,7 +160,9 @@ $(document).ready(function(){
             localStorage.setItem('atelier_current_user', user.nombre);
             sessionStorage.setItem('atelier_toast_success', "¡Bienvenido de vuelta, " + user.nombre + "!");
             // En Live Server o archivo local, redirigimos/recargamos en index.html para evitar descargar .php
-            window.location.href = "index.html";
+            const loginPath = window.location.pathname.toLowerCase();
+            const loginRedirect = (loginPath.includes('/pages/') || loginPath.includes('\\pages\\')) ? '../index.html' : 'index.html';
+            window.location.href = loginRedirect;
         } else {
             window.showAtelierBottomToast("Credenciales incorrectas. Verifique su correo y contraseña.", true);
         }
@@ -219,6 +223,10 @@ function checkLocalUserDisplay() {
         if (pNombre && (pNombre.value === '' || pNombre.value === 'Carlos')) {
             pNombre.value = localUser;
         }
+
+        if (typeof window.atelierUpdateCartIconVisibility === 'function') {
+            window.atelierUpdateCartIconVisibility();
+        }
     } else {
         // No hay sesión activa: mostrar ícono normal de silueta sin cápsula
         userIcon.style.display = "flex";
@@ -234,6 +242,10 @@ function checkLocalUserDisplay() {
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
             </svg>
         `;
+
+        if (typeof window.atelierUpdateCartIconVisibility === 'function') {
+            window.atelierUpdateCartIconVisibility();
+        }
     }
 }
 
