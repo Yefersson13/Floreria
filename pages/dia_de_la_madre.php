@@ -52,7 +52,7 @@
             </div>
 
             <div class="nav-right">
-                <a href="../index.html#cart" class="nav-icon" id="cart-icon">
+                <a href="../index.html#cart" class="nav-icon" id="cart-icon" style="display:none;">
                     <svg viewBox="0 0 24 24">
                         <path d="M5 9h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z" />
                         <path d="M9 9V6a3 3 0 0 1 6 0v3" />
