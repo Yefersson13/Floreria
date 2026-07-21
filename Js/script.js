@@ -6,6 +6,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname.toLowerCase();
     const isIndexLanding = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('/');
 
+    // Páginas de fechas especiales (Día de la Madre / Padre / Maestro): igual que en index.html,
+    // NO tienen carrito propio. El ícono de compras permanece oculto y los botones de compra
+    // invitan a iniciar sesión o registrarse.
+    const specialDatePages = ['dia_de_la_madre', 'dia_del_padre', 'dia_del_maestro'];
+    const isSpecialDatePage = specialDatePages.some(p => currentPath.includes(p));
+    const isLoginGatedPage = isIndexLanding || isSpecialDatePage;
+
+    // Determina si hay un usuario con sesión iniciada (LocalDB offline o sesión PHP reflejada en localStorage)
+    function isAtelierUserLoggedIn() {
+        const u = localStorage.getItem('atelier_current_user');
+        return !!(u && u.trim() !== '' && u.trim() !== 'undefined' && u.trim() !== 'null' && u.trim() !== 'Carlos');
+    }
+
     // 1. Mobile Menu Toggle (Anclado exactamente debajo del icono |||)
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.getElementById('mobileMenuDropdown');
@@ -221,9 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.atelierAddToCart = function(name, priceStr, img, subtitle = "Colección Exclusiva", qty = 1) {
-        if (isIndexLanding) {
-            // En index.html no existe carrito: cualquier intento de agregar
-            // productos (venga de donde venga) invita a iniciar sesión/registrarse.
+        if (isLoginGatedPage) {
+            // En index.html y en las páginas de fechas especiales no existe carrito propio:
+            // cualquier intento de agregar productos (venga de donde venga) invita a iniciar sesión/registrarse.
             openLoginForm();
             showLuxuryToast('🔒 <span>Inicia sesión o regístrate para agregar productos a tu carrito</span>');
             return;
@@ -590,9 +603,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    if (isIndexLanding) {
-        // En index.html NO hay carrito de compras: los botones "Agregar"/"Comprar"
-        // invitan a iniciar sesión o registrarse. El carrito real vive en pagina.php.
+    if (isLoginGatedPage) {
+        // En index.html y en las páginas de fechas especiales NO hay carrito de compras:
+        // los botones "Agregar"/"Comprar" invitan a iniciar sesión o registrarse.
+        // El carrito real vive en pagina.php.
         botones.forEach(boton => {
             boton.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -842,6 +856,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const heartBadge = createNavBadge(navHeart, 'heart-badge');
     const cartBadge = createNavBadge(navCart, 'cart-badge');
 
+    // En las páginas de fechas especiales el ícono de compras permanece oculto (igual que en
+    // index.html) mientras no haya una sesión iniciada; se muestra automáticamente al loguearse.
+    function updateCartIconVisibility() {
+        if (!navCart) return;
+        if (isSpecialDatePage) {
+            navCart.style.display = isAtelierUserLoggedIn() ? 'flex' : 'none';
+        }
+    }
+    updateCartIconVisibility();
+    window.atelierUpdateCartIconVisibility = updateCartIconVisibility;
+
     function updateBadgeCount(badgeEl, count) {
         if (!badgeEl) return;
         badgeEl.textContent = count;
@@ -862,7 +887,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navCart) {
         navCart.addEventListener('click', (e) => {
             e.preventDefault();
-            if (isIndexLanding) {
+            if (isLoginGatedPage) {
                 openLoginForm();
                 showLuxuryToast('🔒 <span>Inicia sesión o regístrate para ver tu carrito</span>');
                 return;
@@ -1055,7 +1080,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Botón Agregar al Carrito dentro del modal
     pmAddBtn.addEventListener('click', () => {
-        if (isIndexLanding) {
+        if (isLoginGatedPage) {
             closeProductModal();
             openLoginForm();
             showLuxuryToast('🔒 <span>Inicia sesión o regístrate para agregar productos a tu carrito</span>');
