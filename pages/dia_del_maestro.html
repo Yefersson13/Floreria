@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Atelier - Especial de Flores para el Día del Maestro. Un detalle floral único para agradecer a quien nos guió con sabiduría.">
+    <title>Atelier | Día del Maestro</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="stylesheet" href="../CSS/dia_de_la_madre.css">
+    <style>
+        /* Variante de color para Día del Maestro */
+        :root {
+            --accent-mom: #5C6B2E;
+            --btn-pink: #DDE8C0;
+            --btn-pink-hover: #3e4a1f;
+            --watermark-color: #5C6B2E;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="nav-left">
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <a href="../index.html#nosotros" class="nav-text-link">Nosotros</a>
+            </div>
+
+            <div class="nav-center">
+                <a href="../index.html" class="logo-brand">
+                    <svg viewBox="0 0 240 70" class="brand-logo-svg" style="height: 48px; width: 160px;">
+                        <path d="M20,35 C30,20 45,20 55,35 C60,42 70,42 75,35 C80,30 85,25 95,35" fill="none"
+                            stroke="#BA9281" stroke-width="1.2" />
+                        <path d="M30,38 C40,28 50,38 60,28" fill="none" stroke="#BA9281" stroke-width="0.8"
+                            opacity="0.7" />
+                        <circle cx="45" cy="28" r="1.5" fill="#BA9281" />
+                        <text x="120" y="46" font-family="'Playfair Display', serif" font-weight="600" font-size="34"
+                            fill="#7A6256" text-anchor="middle">A</text>
+                        <path d="M145,35 C155,25 160,30 165,35 C170,42 180,42 185,35 C195,20 210,20 220,35" fill="none"
+                            stroke="#BA9281" stroke-width="1.2" />
+                        <path d="M180,28 C190,38 200,28 210,38" fill="none" stroke="#BA9281" stroke-width="0.8"
+                            opacity="0.7" />
+                        <circle cx="195" cy="28" r="1.5" fill="#BA9281" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="nav-right">
+                <a href="../index.html#cart" class="nav-icon" id="cart-icon" style="display:none;">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 9h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z" />
+                        <path d="M9 9V6a3 3 0 0 1 6 0v3" />
+                    </svg>
+                </a>
+                <a href="#" class="nav-icon" id="user-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="7" r="4" />
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    </svg>
+                </a>
+                <a href="../index.html#wishlist" class="nav-icon" id="heart-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                </a>
+
+                <!-- Mobile Menu Dropdown -->
+                <div class="mobile-menu-dropdown" id="mobileMenuDropdown">
+                    <div class="mobile-menu-section">
+                        <h3>Fechas especiales</h3>
+                        <ul>
+                            <li><a href="dia_de_la_madre.php">Día de la madre</a></li>
+                            <li><a href="dia_del_padre.php">Día del padre</a></li>
+                            <li><a href="dia_del_maestro.php">Día del maestro</a></li>
+                            <li><a href="#">Día del niño</a></li>
+                            <li><a href="#">Ramos de novia</a></li>
+                        </ul>
+                    </div>
+                    <div class="mobile-menu-section">
+                        <h3>Ocasiones</h3>
+                        <ul>
+                            <li><a href="#">Cumpleaños</a></li>
+                            <li><a href="#">Graduaciones</a></li>
+                            <li><a href="#">Románticos</a></li>
+                            <li><a href="#">Nacimiento</a></li>
+                            <li><a href="#">Agradecimiento</a></li>
+                            <li><a href="#">Condolencias</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-mom animate-fade-up" id="inicio">
+        <div class="hero-mom-left">
+            <img src="../assets/images/mama_bouquet.png" class="hero-mom-img" alt="Arreglo floral para el Maestro Atelier Florería">
+        </div>
+        <div class="hero-mom-right">
+            <div class="hero-mom-watermark">
+                <svg viewBox="0 0 240 240">
+                    <path
+                        d="M30,175 C45,100 55,75 75,45 C95,20 115,10 135,15 C155,20 162,50 167,70 C172,90 178,105 185,175"
+                        fill="none" stroke="var(--watermark-color)" stroke-width="1.2" opacity="0.65" />
+                    <path d="M55,75 C70,95 85,115 115,110 C145,105 130,85 115,78" fill="none"
+                        stroke="var(--watermark-color)" stroke-width="0.8" opacity="0.5" />
+                    <circle cx="115" cy="110" r="2.5" fill="var(--watermark-color)" opacity="0.6" />
+                    <path d="M70,145 C85,145 100,147 135,145" fill="none" stroke="var(--watermark-color)"
+                        stroke-width="1.5" opacity="0.8" />
+                    <path d="M82,151 C92,142 115,151 125,142" fill="none" stroke="var(--watermark-color)"
+                        stroke-width="1.0" opacity="0.6" />
+                    <circle cx="108" cy="142" r="2" fill="var(--watermark-color)" opacity="0.6" />
+                    <text x="100" y="165" font-family="'Playfair Display', serif" font-weight="600" font-size="120"
+                        fill="var(--watermark-color)" opacity="0.8">A</text>
+                    <path d="M135,145 C142,135 145,138 150,145 M155,135 C162,148 172,135 178,148" fill="none"
+                        stroke="var(--watermark-color)" stroke-width="1.0" opacity="0.6" />
+                    <circle cx="166" cy="135" r="2" fill="var(--watermark-color)" opacity="0.5" />
+                </svg>
+            </div>
+            <div class="hero-mom-content">
+                <h2 class="hero-mom-subtitle">Para:</h2>
+                <h1 class="hero-mom-title">MAESTRO</h1>
+                <p class="hero-mom-desc">
+                    Su dedicación, paciencia y sabiduría dejaron huella en cada uno de nosotros. En Atelier, honramos
+                    a quienes guían con pasión, con arreglos florales únicos que expresan la gratitud más sincera.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Catalog Section -->
+    <section class="collection section" id="coleccion">
+        <div class="container">
+
+            <!-- Session Confirm Logout Box -->
+            <div class="opcion_sesion">
+                <p>¿Desea Salir de la Sesión?</p>
+                <div class="opc_btn">
+                    <button class="opc_ses btn_cerSi">Cancelar</button>
+                    <button class="opc_ses btn_cerNo" onclick="if(typeof window.atelierLogout==='function'){window.atelierLogout(event);}else{window.location.href='../php/logout.php';}return false;">Cerrar Sesión</button>
+                </div>
+            </div>
+
+            <!-- Register Form Overlay -->
+            <div class="form-overlay-container">
+                <form id="Regis_for" action="../php/registro.php" method="post" class="Inicio">
+                    <div class="form-header">
+                        <h3>Registrarse</h3>
+                        <span class="close-form-btn">&times;</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" required placeholder="Tu nombre completo" name="nombre">
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" required placeholder="ejemplo@email.com" name="correo">
+                    </div>
+                    <div class="input-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" required name="telefono">
+                    </div>
+                    <div class="input-group">
+                        <label for="contra">Contraseña</label>
+                        <input type="password" id="contra" required name="contra">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Registrarse</button>
+                    <p>¿Ya tienes cuenta? <a id="regist" href="#">Iniciar Sesión</a></p>
+                </form>
+            </div>
+
+            <!-- Login Form Overlay -->
+            <div class="form-overlay-container">
+                <form id="Inicio_for" action="../php/login.php" method="post" class="Inicio-F">
+                    <div class="form-header">
+                        <h3>Iniciar Sesión</h3>
+                        <span class="close-form-btn">&times;</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-email">Correo Electrónico</label>
+                        <input type="email" id="login-email" required placeholder="ejemplo@email.com" name="correo">
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Contraseña</label>
+                        <input type="password" id="login-password" required name="contra">
+                    </div>
+                    <p>¿No tienes cuenta? <a class="btn-inicio" id="regist" href="#">Registrarse</a></p>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Iniciar Sesión</button>
+                </form>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid collection-grid">
+                <!-- Product 1 -->
+                <div class="product-card fade-in">
+                    <div class="product-img-wrapper">
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <img src="../assets/images/cesto_lilas.png" alt="Cesto Gratitud" class="product-img">
+                        <div class="product-overlay">
+                            <span class="ver-detalles-text">Ver detalles</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cesto Gratitud</h3>
+                        <p class="desc">Elegante cesto artesanal con flores frescas en tonos verdes y blancos</p>
+                        <p class="price">S/ 149.90</p>
+                        <button class="btnComprar btn btn-agregar">Agregar</button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-img-wrapper">
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <img src="../assets/images/florero_encanto.png" alt="Florero Sabiduría" class="product-img">
+                        <div class="product-overlay">
+                            <span class="ver-detalles-text">Ver detalles</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Florero Sabiduría</h3>
+                        <p class="desc">Florero premium con rosas importadas y follaje aromático</p>
+                        <p class="price">S/ 149.90</p>
+                        <button class="btnComprar btn btn-agregar">Agregar</button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card fade-in delay-2">
+                    <div class="product-img-wrapper">
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <img src="../assets/images/tulipanes_caja.png" alt="Caja Tulipanes" class="product-img">
+                        <div class="product-overlay">
+                            <span class="ver-detalles-text">Ver detalles</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Caja Tulipanes</h3>
+                        <p class="desc">Hermosa caja con tulipanes frescos de temporada</p>
+                        <p class="price">S/ 129.90</p>
+                        <button class="btnComprar btn btn-agregar">Agregar</button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card fade-in delay-3">
+                    <div class="product-img-wrapper">
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <img src="../assets/images/ramo_coreano_lilas.png" alt="Ramo Distinción" class="product-img">
+                        <div class="product-overlay">
+                            <span class="ver-detalles-text">Ver detalles</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ramo Distinción</h3>
+                        <p class="desc">Ramo envuelto en papel coreano con flores de corte del día</p>
+                        <p class="price">S/ 129.90</p>
+                        <button class="btnComprar btn btn-agregar">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer footer-mom">
+        <div class="container">
+            <div class="footer-brand">
+                <div class="footer-logo-brand">
+                    <span class="logo-title">ATELIER</span>
+                    <span class="logo-subtitle">FLORERÍA</span>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>ATELIER</h3>
+                    <ul>
+                        <li><a href="../index.html#nosotros">Nosotros</a></li>
+                        <li><a href="../index.html#inicio">Atelier Florería</a></li>
+                        <li><a href="#">Certificación OEA</a></li>
+                        <li><a href="#">Tiendas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Atención al cliente</h3>
+                    <ul>
+                        <li><a href="#">Preguntas frecuentes</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
+                        <li><a href="#">Cambios y devoluciones</a></li>
+                        <li><a href="#">Bases legales</a></li>
+                        <li><a href="#" style="font-weight: 700;">Libro de reclamaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contáctanos</h3>
+                    <p style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+                        Horario de atención:<br>
+                        <span style="color: #666; font-weight: 400;">Lun-Vie 9:00 am a 6:00 pm</span>
+                    </p>
+                    <p style="font-weight: 500; margin-bottom: 8px; color: #2C302E; font-size: 0.95rem;">Social media</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Información</h3>
+                    <p style="color: #2C302E; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6;">
+                        Razón Social: <span style="color: #666;">TRADING FASHION LINE S.A.</span>
+                    </p>
+                    <p style="color: #2C302E; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6;">
+                        RUC: <span style="color: #666;">20501057682</span>
+                    </p>
+                    <p style="color: #2C302E; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6;">
+                        Dirección Legal: <span style="color: #666;">Av. Santuario Nro. 1323</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <span class="footer-copy">ATELIER &copy;2026</span>
+                <div class="footer-bottom-links">
+                    <a href="#">Términos &amp; Condiciones y Políticas de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Carrito Flotante -->
+    <div class="floating-cart" id="floating-cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="floating-cart-badge" id="floating-cart-badge">0</span>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="../Js/script.js"></script>
+    <script type="text/javascript" src="../Js/funciones.js"></script>
+
+</body>
+
+</html>
